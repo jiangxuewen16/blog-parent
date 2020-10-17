@@ -6,3 +6,14 @@ spring:
     name: blog
   profiles:
     active: dev
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      client:
+        reactive:
+          connection-timeout: 3000
+          socket-timeout: 3000
+  elasticsearch:
+    rest:
+      uris: http://121.36.170.66:9200

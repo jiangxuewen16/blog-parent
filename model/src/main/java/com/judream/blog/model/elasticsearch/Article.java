@@ -2,19 +2,22 @@ package com.judream.blog.model.elasticsearch;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author jiangxuewen
+ */
 @Data
 @Document(indexName = "article")
-public class article implements Serializable {
+public class Article implements Serializable {
     private static final long serialVersionUID = 6320548148250372657L;
 
     @Id
@@ -23,11 +26,12 @@ public class article implements Serializable {
     /**
      * 类型
      */
+    @Field(type = FieldType.Keyword)
     private Integer type;
     /**
      * 分类ID
      */
-    @JSONField(name="product_code")
+    @Field(type = FieldType.Keyword)
     private String catId;
     /**
      * 标题
@@ -42,6 +46,7 @@ public class article implements Serializable {
     /**
      *作者
      */
+    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private String author;
     /**
      * 标签
